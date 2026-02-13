@@ -1,9 +1,6 @@
-export default function home() {
-    fetch("https://pokeapi.co/api/v2/pokemon")
-        .then((response) => response.json())
-        .then((data) => console.info(data))
-        .catch((error) => console.error(error));
+import Card1 from "../components/card1";
 
+export default function home() {
     return (
         <div>
             <div className="flex justify-between items-center px-20 pt-15">
@@ -16,9 +13,9 @@ export default function home() {
                             <path d="m21 21-4.3-4.3"></path>
                         </g>
                     </svg>
-                    <input type="search" className="grow text-black" placeholder="Search" />
                 </label>
             </div>
+            <Card1 />
         </div>
     );
 }
