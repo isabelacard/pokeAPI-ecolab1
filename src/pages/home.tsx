@@ -1,6 +1,10 @@
+import { useState } from "react";
+
 import Card1 from "../components/card1";
 
-export default function home() {
+export default function Home() {
+    const [search, setSearch] = useState("");
+
     return (
         <div>
             <div className="flex justify-between items-center px-20 pt-15">
@@ -13,9 +17,10 @@ export default function home() {
                             <path d="m21 21-4.3-4.3"></path>
                         </g>
                     </svg>
+                    <input type="search" className="grow text-black" placeholder="Search" value={search} onChange={(e) => setSearch(e.target.value)} />
                 </label>
             </div>
-            <Card1 />
+            <Card1 search={search} />
         </div>
     );
 }

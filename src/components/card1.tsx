@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+
 import type { PokemonTypes } from "../types/PokeTypes";
 
-export default function Card1() {
+export default function Card1({ search }: { search: string }) {
     const [pokemons, setPokemons] = useState<PokemonTypes[]>([]);
     useEffect(() => {
         fetch("https://pokeapi.co/api/v2/pokemon?limit=687")
@@ -30,10 +31,12 @@ export default function Card1() {
             .catch((error) => console.error("Error", error));
     }, []);
 
+    const filteredPokemons = pokemons.filter((p) => p.name.toLowerCase().includes(search.toLowerCase()));
+
     return (
         <div>
             <div className="p-6 flex flex-wrap gap-6 justify-center">
-                {pokemons.map((p) => (
+                {filteredPokemons.map((p) => (
                     <div key={p.id} className="w-64 bg-pink-50 m-4 border border-pink-200 rounded-3xl shadow-md p-5 flex flex-col items-center text-center hover:shadow-lg hover:-translate-y-1 transition-all duration-200">
                         <img src={p.image} alt={p.name} className="w-28 h-28 object-cover rounded-2xl mb-3 border border-pink-200 shadow-sm" />
                         <h3 className="text-pink-700 font-semibold text-lg line-clamp-1 capitalize">{p.name}</h3>
