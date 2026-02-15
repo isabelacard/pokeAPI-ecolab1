@@ -6,5 +6,4 @@ export type PokemonTypes = {
     weight: number;
     habitat: string;
     color: string;
-    evolutionStage: string;
 };
