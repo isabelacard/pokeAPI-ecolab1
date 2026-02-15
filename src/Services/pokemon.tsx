@@ -1,7 +1,7 @@
 import type { PokemonTypes } from "../types/PokeTypes";
 
 const getPokemons = async (): Promise<PokemonTypes[]> => {
-    const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=687");
+    const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=663");
     const data = await response.json();
 
     const promises = data.results.map(async (pokemon: { url: string }) => {
