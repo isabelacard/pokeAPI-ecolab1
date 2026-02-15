@@ -35,7 +35,7 @@ export default function Home() {
                 if (err instanceof Error) {
                     setError(err.message);
                 } else {
-                    setError("Unknown error occurred");
+                    setError("error");
                 }
                 setLoading(false);
             }
@@ -64,8 +64,8 @@ export default function Home() {
 
     if (!online) {
         return (
-            <div className="flex flex-col justify-center items-center mt-75 min-h-screen">
-                <p className="font-bold text-pink-300/40">WiFi Error</p>
+            <div className="flex flex-col justify-center items-center min-h-screen">
+                <p className="font-bold text-pink-300/40">Connection Error ＞﹏＜</p>
                 <button onClick={() => window.location.reload()} className="bg-white/30 px-4 py-1 rounded-3xl w-30 mt-5 cursor-pointer transition-all hover:bg-pink-800 hover:text-white">
                     Retry
                 </button>
@@ -79,34 +79,33 @@ export default function Home() {
     });
 
     return (
-        <div>
-            <div className="flex justify-between items-center px-20 pt-15">
-                <h1 className="text-pink-300 text-4xl font-bold hover:scale-110 transition-all cursor-none">POKEDEX (*^▽^*)</h1>
-
-                <label className="input input-bordered bg-pink-300 w-1/4 rounded-full flex items-center gap-2 transition-all hover:scale-103 focus-within:scale-105">
-                    <svg className="h-[1em] opacity-50 text-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2.5" fill="none" stroke="currentColor">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <path d="m21 21-4.3-4.3"></path>
-                        </g>
-                    </svg>
-                    <input type="search" className="grow text-black placeholder:text-gray-600 outline-none" placeholder="Search Pokemon, Habitat or Color" value={search} onChange={(e) => setSearch(e.target.value)} />
-                    {search && (
-                        <button onClick={() => setSearch("")} className="text-black hover:text-gray-700 cursor-pointer">
-                            ✕
-                        </button>
-                    )}
+        <div className="min-h-screen bg-gradient-to-b from-pink-100 via-pink-50 to-white">
+            <div className="flex justify-between items-center px-20 pt-16">
+                <h1 className="text-pink-400 text-5xl font-extrabold">POKEDEX (｡•ᴗ•｡)♡</h1>
+                <label
+                    className="flex items-center gap-3 w-1/3 px-4 py-2 
+        bg-pink-200/70 backdrop-blur-md rounded-full 
+        border-2 border-pink-300 shadow-md"
+                >
+                    <input
+                        type="search"
+                        className="grow bg-transparent text-pink-700 
+                        placeholder:text-pink-400 outline-none text-sm"
+                        placeholder="Search Pokémon, habitat or color… (´｡• ᵕ •｡`)"
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                    />
                 </label>
             </div>
-
-            <div className="text-center text-gray-500 mb-4 mt-5">Found {filteredPokemons.length} Pokemon</div>
-
+            <div className="text-center text-pink-400/70 mt-6 mb-4 text-sm">
+                Found <span className="font-bold text-pink-500">{filteredPokemons.length}</span> Pokémon ✧(｡•̀ᴗ-)✧
+            </div>
             {filteredPokemons.length > 0 ? (
                 <Card1 pokemons={filteredPokemons} />
             ) : (
-                <div className="flex flex-col items-center justify-center h-64 text-gray-500">
-                    <p className="text-2xl font-bold text-pink-300/40">Data not</p>
-                    <p className="text-2xl font-bold text-pink-300/40">Found</p>
+                <div className="flex flex-col items-center justify-center h-64 text-pink-300">
+                    <p className="text-3xl font-bold opacity-60">No data… (｡•́︿•̀｡)</p>
+                    <p className="text-sm opacity-50 mt-2">Try another cute search ✿</p>
                 </div>
             )}
         </div>

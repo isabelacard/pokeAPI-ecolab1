@@ -2,6 +2,6 @@
 @plugin "daisyui";
 
 body {
-    background-color: black;
+    background-color: white;
     min-height: 100vh;
 }
