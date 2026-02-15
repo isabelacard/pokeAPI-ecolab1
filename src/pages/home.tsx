@@ -66,8 +66,8 @@ export default function Home() {
     if (!online) {
         return (
             <div className="flex flex-col justify-center items-center min-h-screen">
-                <p className="font-bold text-pink-300/40">Connection Error ＞﹏＜</p>
-                <button onClick={() => window.location.reload()} className="bg-white/30 px-4 py-1 rounded-3xl w-30 mt-5 cursor-pointer transition-all hover:bg-pink-800 hover:text-white">
+                <p className="font-bold text-pink-800">Connection Error ＞﹏＜</p>
+                <button onClick={() => window.location.reload()} className="bg-pink-300 px-4 py-1 rounded-3xl w-30 mt-5 cursor-pointer transition-all hover:bg-pink-800 hover:text-white">
                     Retry
                 </button>
             </div>
