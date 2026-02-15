@@ -1,9 +1,31 @@
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
 import Card1 from "../components/card1";
+import type { PokemonTypes } from "../types/PokeTypes";
+
+import { getPokemons } from "../Services/pokemon";
 
 export default function Home() {
+    const [pokemons, setPokemons] = useState<PokemonTypes[]>([]);
     const [search, setSearch] = useState("");
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await getPokemons();
+                setTimeout(() => {
+                    setPokemons(data);
+                }, 2000);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+        fetchData();
+    }, []);
+
+    const filteredPokemons = pokemons.filter((p) => {
+        const searchLower = search.toLowerCase();
+        return p.name.toLowerCase().includes(searchLower) || (p.habitat && p.habitat.toLowerCase().includes(searchLower)) || (p.color && p.color.toLowerCase().includes(searchLower));
+    });
 
     return (
         <div>
@@ -20,7 +42,17 @@ export default function Home() {
                     <input type="search" className="grow text-black" placeholder="Search" value={search} onChange={(e) => setSearch(e.target.value)} />
                 </label>
             </div>
-            <Card1 search={search} />
+
+            <div className="text-center text-gray-500 mb-4">Found {filteredPokemons.length} Pokemon</div>
+
+            {filteredPokemons.length > 0 ? (
+                <Card1 pokemons={filteredPokemons} />
+            ) : (
+                <div className="flex flex-col items-center justify-center h-64 text-gray-500">
+                    <p className="text-xl font-semibold">No Pokemon found</p>
+                    <p>Try adjusting your search or filters.</p>
+                </div>
+            )}
         </div>
     );
 }
